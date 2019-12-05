@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../YelpsReviews.css';
+import Icon from './icons/wrapper.jsx'
 
 function HoverLinks(props) {
   return (
@@ -9,6 +10,8 @@ function HoverLinks(props) {
       <li>Compliment</li>
       <li>Send message</li>
       <li>Follow </li>
+      <Icon className='friends' icon='friends' />
+      <Icon icon='message'/>
     </ul>
   )
 }
