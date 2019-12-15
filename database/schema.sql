@@ -1,12 +1,12 @@
-DROP DATABASE IF EXISTS yelpReviews;
+DROP DATABASE IF EXISTS yelpreviews;
 
-CREATE DATABASE yelpReviews;
+CREATE DATABASE yelpreviews;
 
-USE yelpReviews;
+USE yelpreviews;
 
 CREATE TABLE restaurants (
   id int not null auto_increment,
-  name varchar(50) not null,
+  restname varchar(50) not null,
   primary key(id)
 );
 

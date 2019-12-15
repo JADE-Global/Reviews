@@ -9,9 +9,10 @@ const foodPics = 'https://yelpfoodpics.s3-us-west-1.amazonaws.com/';
 
 
 const connection = mysql.createConnection({
-  user: 'root',
-  password: 'Derty321$',
-  database: 'yelpReviews'
+  host: 'database',
+  user: 'user',
+  password: 'user',
+  database: 'yelpreviews'
 });
 
 connection.connect();
@@ -22,7 +23,8 @@ let db = {
     let result = new Promise((resolve, reject) => {
       connection.query(query, function(err, data) {
         if(err) {
-          reject(err);
+          console.log('query', query)
+          reject('query error', err);
         } else {
           resolve(data);
         }
@@ -33,7 +35,7 @@ let db = {
 
   seedRestaurants: async function() {
 
-    let query = `INSERT INTO restaurants (name) VALUES `;
+    let query = `INSERT INTO restaurants (restname) VALUES `;
     for (let i = 0; i < restaurants.length; i++) {
       if(i === restaurants.length - 1) {
         query += `('${restaurants[i]}');`;
@@ -97,7 +99,7 @@ let db = {
       let reviewResult = await db.querySQL(query)
       if(links.length > 0) {
         let lastInsertId = reviewResult.insertId;
-        let reviewPicQuery = `INSERT INTO reviewpictures (links, review_id) VALUES ('${links}', ${lastInsertId});`;
+        let reviewPicQuery = `INSERT INTO reviewPictures (links, review_id) VALUES ('${links}', ${lastInsertId});`;
         let reviewPics = await db.querySQL(reviewPicQuery);
         let updateUserQuery =  `UPDATE users SET numReviews = numReviews + 1, numPics = numPics + ${links.length} WHERE id = ${userId};`
         await db.querySQL(updateUserQuery);
@@ -111,4 +113,4 @@ let db = {
 db.seedUsers()
 .then(() => db.seedRestaurants())
 .then(() => db.seedReviews())
-.catch(err => {console.log('err')});
+.catch(err => {console.log('seeding err', err)});

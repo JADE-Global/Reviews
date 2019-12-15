@@ -1,8 +1,9 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  user: 'root',
-  password: 'Derty321$',
+  host: 'database',
+  user: 'user',
+  password: 'user',
   database: 'yelpreviews'
 });
 
@@ -11,7 +12,7 @@ connection.connect();
 let mysqlQueries = {
 
   getReviews: function(name, callback) {
-    connection.query(`SELECT * from restaurants WHERE name = '${name}';`, function(err, data) {
+    connection.query(`SELECT * from restaurants WHERE restname = '${name}';`, function(err, data) {
       if(err) {
         console.log('mysql error');
       } else {
@@ -29,9 +30,9 @@ let mysqlQueries = {
     }
     if(sort === 'Highest' || sort === 'Lowest'){ 
       sortBy = 'stars';
-      sort === 'Highest' ? direction = 'ASC' : direction = 'DESC';
+      sort === 'Highest' ? direction = 'DESC' : direction = 'ASC';
     }
-    connection.query(`SELECT * FROM restaurants INNER JOIN reviews ON restaurants.id = reviews.restaurant_id INNER JOIN users ON users.id = reviews.user_id LEFT JOIN reviewpictures ON reviewpictures.review_id = reviews.id WHERE restaurants.name = '${name}' ORDER BY reviews.${sortBy} ${direction} LIMIT 20;`, function(err, data) {
+    connection.query(`SELECT * FROM restaurants INNER JOIN reviews ON restaurants.id = reviews.restaurant_id INNER JOIN users ON users.id = reviews.user_id LEFT JOIN reviewPictures ON reviewPictures.review_id = reviews.id WHERE restaurants.restname = '${name}' ORDER BY reviews.${sortBy} ${direction} LIMIT 20;`, function(err, data) {
       if(err) {
         console.log('get restaurant review error');
       } else {

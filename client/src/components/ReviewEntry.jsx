@@ -3,7 +3,6 @@ import styles from '../ReviewEntry.css';
 import Stars from './Stars.jsx';
 import ReviewPictures from './ReviewPictures.jsx'
 import UserInfo from './UserInfo.jsx';
-import PopoverPics from './PopoverPics.jsx';
 
 class ReviewEntry extends React.Component {
   constructor(props) {
@@ -15,24 +14,6 @@ class ReviewEntry extends React.Component {
       review: {},
     }
   }
-
-  componentDidMount() {
-    let data = this.props.review;
-    let userInfo = {
-      name: data.name,
-      location: data.location,
-      elite: data.elite,
-      friend: data.friends,
-      numPics: data.numPics,
-      picture: data.picture,
-      reviews: data.numReviews,
-      date: data.date.split('T')[0],
-    };
-
-    this.setState({
-      user: userInfo
-    });
-  };
 
   hoverChange() {
     this.setState({
@@ -48,17 +29,28 @@ class ReviewEntry extends React.Component {
   }
 
   render() {
+    let data = this.props.review;
+    let userInfo = {
+      name: data.name,
+      location: data.location,
+      elite: data.elite,
+      friend: data.friends,
+      numPics: data.numPics,
+      picture: data.picture,
+      reviews: data.numReviews,
+      date: data.date.split('T')[0],
+    };
     return (
       
       <div className={styles.reviewEntry_container} onMouseEnter={this.hoverChange.bind(this)} onMouseLeave={this.hoverChange.bind(this)}>
-        <UserInfo userInfo={this.state.user} hover={this.state.hover}/>
+        <UserInfo userInfo={userInfo} hover={this.state.hover}/>
         <div className={styles.review}>
           <div className={styles.starDate}>
             <div>
               <Stars stars={this.props.review.stars}/> 
             </div>
             <div>
-              {this.state.user.date}
+              {userInfo.date}
             </div>
           </div>
           <div>{this.props.review.review}</div>

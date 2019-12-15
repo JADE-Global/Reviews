@@ -3,6 +3,7 @@ body {
 }
 
 .fullPage {
+  cursor: pointer;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -16,6 +17,7 @@ body {
 }
 
 .wrapper {
+  cursor: default;
   width: 1200px;
   height: 600px;
   background-color: lightblue;
@@ -79,6 +81,7 @@ body {
 }
 
 .picture {
+  cursor: pointer;
   max-width: 100%;
   min-height: 100%;;
 }

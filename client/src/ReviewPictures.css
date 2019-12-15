@@ -16,11 +16,13 @@
 }
 
 .pics1 {
+  cursor: pointer;
   max-width: 100%;
   min-height: 100%;
 }
 
 .pics2 {
+  cursor: pointer;
   max-width: 100%;
   min-height: 100%;
 }

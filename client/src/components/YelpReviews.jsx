@@ -3,6 +3,7 @@ import axios from 'axios';
 import Search from './Search.jsx';
 import ReviewList from './ReviewList.jsx';
 import LoggedInUser from './LoggedInUser.jsx';
+import Pagination from './Pagination.jsx';
 import regeneratorRuntime from "regenerator-runtime";
 import styles from '../YelpsReviews.css';
 
@@ -50,10 +51,7 @@ class YelpReviews extends React.Component {
   }
 
   onSelectChange (e) {
-    this.setState(()=>{
-      return {sort: temp}
-    })
-    this.updateReviews();
+    this.setState({sort: e.target.value}, () => this.updateReviews());
   }
 
   render() {
@@ -74,6 +72,7 @@ class YelpReviews extends React.Component {
       </div>     
       <LoggedInUser userInfo={this.state.loggedUser} hover={false} restName={this.state.restName}/>
       <ReviewList reviews={this.state.reviewsInfo} hover={this.state.hover}/>
+      <Pagination/>
     </div>
   )}
 }
